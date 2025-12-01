@@ -2,9 +2,8 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import indexRoutes from "./routes/index.js";
-import productsRoutes from "./routes/products.js";
-import categoriesRouter from "./routes/categories.js";
-import ordersRoutes from "./routes/orders.js"
+import playersRoutes from "./routes/players.js";
+import countriesRouter from "./routes/countries.js";
 
 /* Clear the console  */
 console.log("\x1Bc");
@@ -38,9 +37,8 @@ app.use(
 
 /* Routes */
 app.use("/", indexRoutes);
-app.use("/products", productsRoutes);
-app.use("/categories", categoriesRouter);
-app.use("/orders", ordersRoutes);
+app.use("/players", playersRoutes);
+app.use("/countries", countriesRouter);
 
 /* Error handler  */
 // catch 404 and forward to error handler
