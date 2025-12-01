@@ -25,8 +25,7 @@ router.get("/", async (_req, res) => {
   }
 });
  
-// Productos por categoría (slug o id)  -> ya lo teníamos
-router.get("/:key/players", async (req, res) => {
+router.get("/:key", async (req, res) => {
   const { key } = req.params;
   try {
     const isId = key.match(/^[0-9a-fA-F]{24}$/);
@@ -37,9 +36,9 @@ router.get("/:key/players", async (req, res) => {
     if (!country) return res.status(404).send({ message: "Categoría no encontrada" });
  
     const players = await (await import("../models/player.js")).default
-      .find({ countries: country._id })
-      .select("_id name countries img")
-      .populate("countries", "name slug");
+      .find({ country: country._id })
+      .select("_id name country img")
+      .populate("country", "name slug");
  
     return res.status(200).send({
       message: "Productos por categoría",

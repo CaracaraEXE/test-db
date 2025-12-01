@@ -4,7 +4,7 @@ import Player from "../models/player.js";
 
 const findAllPlayers = async (req, res) => {
     try {
-        const players = await Player.find().select("_id name categories img price")
+        const players = await Player.find().select("_id name country element profile img")
         return res.status(200).send({message: "Todos los playeros",players: players})
     } catch (error) {
         return res.status(501).send({message:"Lol you failed",error})
@@ -14,7 +14,7 @@ const findAllPlayers = async (req, res) => {
 const findOnePlayer = async (req, res) => {
     const {id} = req.params
     try{
-        const player = await Player.findOne({_id: id}).select("_id name categories desc size img price")
+        const player = await Player.findOne({_id: id}).select("_id name country element profile img")
         return res.status(200).send({message:"Playero encontrado", player})
     } catch (error) {
         return res.status(501).send({message:"Lol you failed",error})
@@ -22,9 +22,9 @@ const findOnePlayer = async (req, res) => {
 }
 
 const addPlayer = async (req,res) => {
-    const {name, categories, size, price, desc, img} = req.body
+    const {name, country, element, profile, img} = req.body
     try {
-        const player = new Player({name, categories, size, price, desc, img})
+        const player = new Player({name, country, element, profile, img})
         await player.save()
         return res.status(200).send({message:"Playero creado", player})
     } catch(error){
@@ -48,27 +48,6 @@ const deletePlayer = async(req,res) => {
     }
 }
 
-const updatePlayer = async(req,res) => {
-    const {id} = req.params
-    const {name} = req.body
-
-    try {
-        const playerToUpdate = await Player.findOne({_id:id})
-
-        if(!playerToUpdate){
-            return res.status(404).send({message:"No existe el playero",_id:id})
-        }
-
-        //Valores a actualizar
-        playerToUpdate.name = name;
-
-        await playerToUpdate.save({_id: id})
-        return res.status(200).send({message:"Playero actualizado", player:playerToUpdate})
-    } catch(error) {
-                return res.status(501).send({message:"Lol you failed",error})
-    }
-}
-
 
 
 //CRUD endpoints
@@ -76,6 +55,5 @@ router.get("/", findAllPlayers);
 router.get("/:id",findOnePlayer);
 router.post('/',addPlayer);
 router.delete("/:id",deletePlayer)
-router.put("/:id",updatePlayer);
 
 export default router;
