@@ -4,6 +4,7 @@ import cors from "cors";
 import indexRoutes from "./routes/index.js";
 import playersRoutes from "./routes/players.js";
 import countriesRouter from "./routes/countries.js";
+import responseRoutes from "./routes/responses.js"
 
 /* Clear the console  */
 console.log("\x1Bc");
@@ -39,6 +40,7 @@ app.use(
 app.use("/", indexRoutes);
 app.use("/players", playersRoutes);
 app.use("/countries", countriesRouter);
+app.use("/responses",responseRoutes);
 
 /* Error handler  */
 // catch 404 and forward to error handler
