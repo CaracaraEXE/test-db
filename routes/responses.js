@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import response from "../models/response";
+import response from "../models/response.js";
 
 const addResponse = async(req,res) => {
     try{
