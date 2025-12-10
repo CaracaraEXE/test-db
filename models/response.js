@@ -14,7 +14,7 @@ const ChoiceSchema = new mongoose.Schema({
 const ResponseSchema = new mongoose.Schema(
     {
         user:{type:UserSchema,required:true},
-        choices:{type:[ChoiceSchema], required:true}
+        choices:{type:ChoiceSchema, required:true}
     },
     {timestamps:true}
 )
